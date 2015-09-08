@@ -32,7 +32,7 @@ Use `Bstard.define` to describe your state machine
 
 This defines a state machine that:
 
- - has __new__ __submitted__ and __deleted__ states
+ - has __new__, __submitted__ and __deleted__ states
  - responds to _submit_ and _delete_ events
  - has an initial state of __new__
  - transitions from __new__ to __submitted__ when triggered by the _submit_ event
