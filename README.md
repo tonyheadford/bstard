@@ -82,8 +82,9 @@ Trigger events by sending a message to the state machine using the event name su
 
 ```ruby
   machine.submit!
-
+  #=> :submitted
   machine.delete!
+  #=> :deleted
 ```
 
 ### Callbacks

@@ -31,6 +31,13 @@ class EventsTest < Minitest::Test
     assert @fsm.submitted?
   end
 
+  def test_event_method_returns_new_state
+    s = @fsm.submit!
+    assert_equal :submitted, s, "expected :submitted as new state"
+    s = @fsm.delete!
+    assert_equal :deleted, s, "expected :deleted as new state"
+  end
+
   def test_event_method_raises_error_when_no_transition_available
     @fsm.submit!
     assert_raises Bstard::InvalidTransition do

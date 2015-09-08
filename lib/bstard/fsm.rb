@@ -64,6 +64,7 @@ class Bstard::Fsm
         old_state = current_state
         @current_state = new_state
         @state_callbacks.fetch(current_state, []).concat(@state_callbacks.fetch(:any, [])).each { |c| c.call(old_state) }
+        current_state
       end
     end
   end
