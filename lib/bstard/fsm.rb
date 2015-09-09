@@ -11,8 +11,8 @@ class Bstard::Fsm
 
   def initial(state)
     unless state.nil?
-      @current_state = state
-      add_state(state)
+      @current_state = state.to_sym
+      add_state(current_state)
     end
   end
   
@@ -20,7 +20,7 @@ class Bstard::Fsm
     evt = event_name.to_sym
     t = @events.fetch(evt, {})
     @events[evt] = t.merge(transitions)
-    transitions.each { |k,v| add_state(k); add_state(v) }
+    transitions.each { |k,v| add_state(k.to_sym); add_state(v.to_sym) }
     add_event_method(evt)
     add_can_event_method(evt)
   end

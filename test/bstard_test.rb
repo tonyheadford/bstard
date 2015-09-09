@@ -23,4 +23,11 @@ class BstardTest < Minitest::Test
     end
     assert b.states.include?(:start), 'start not included in states'
   end
+
+  def test_initial_state_converted_to_symbol
+    b = Bstard.define do |fsm|
+      fsm.initial "wigwam"
+    end
+    assert_equal :wigwam, b.current_state, 'current state not a symbol'
+  end
 end
