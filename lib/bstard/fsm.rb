@@ -10,10 +10,12 @@ class Bstard::Fsm
   end
 
   def initial(state)
-    @current_state = state
-    add_state(state)
+    unless state.nil?
+      @current_state = state
+      add_state(state)
+    end
   end
-
+  
   def event(event_name, transitions)
     evt = event_name.to_sym
     t = @events.fetch(evt, {})
