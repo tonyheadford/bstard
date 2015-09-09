@@ -52,7 +52,7 @@ The current state of the machine is accessed via the `current_state` method
   #=> :new
 ```
 
-Helper methods are automatically generated for each state consisting of the state name appended with a question mark.  This method returns true is the current state matches the queried state or false otherwise.
+Helper methods are automatically generated for each state consisting of the state name suffixed with a question mark.  This method returns `true` if the current state matches the queried state or `false` otherwise.
 
 ``` ruby
   machine.new?
@@ -65,7 +65,7 @@ Helper methods are automatically generated for each state consisting of the stat
 
 ### Querying Transitions
 
-Helper methods are dynamically generated to enable querying whether an event is valid for the current state.  These methods are named using the event name prefixed with 'can\_' and suffixed with a question mark.
+Helper methods are dynamically generated to enable querying whether an event can transition the current state.  These methods are named using the event name prefixed with 'can\_' and suffixed with a question mark.
 
 ```ruby
   machine.current_state
@@ -78,7 +78,7 @@ Helper methods are dynamically generated to enable querying whether an event is 
 
 ### Triggering Events
 
-Trigger events by sending a message to the state machine using the event name suffixed with an exclamation mark.
+Trigger events by sending a message using the event name suffixed with an exclamation mark.
 
 ```ruby
   machine.submit!
@@ -112,7 +112,7 @@ State change callbacks are configured with `when`
   end
 ```
 
-Use the symbol `:any` for event or state change callbacks that should by run when any event is triggered or after any state change.
+Use the symbol `:any` for event or state change callbacks that should run when any event is triggered or after any state change.
 
 ``` ruby
   machine = Bstard.define do |fsm|
@@ -133,6 +133,7 @@ class MyModel < ActiveRecord::Base
   def make_draft
     # do stuff
     state.save!
+    save
   end
 
 private
