@@ -49,25 +49,4 @@ class EventsTest < Minitest::Test
     assert @fsm.can_submit?
     refute @fsm.can_delete?
   end
-
-  # @absence_state ||= Bstard.define do |fsm|
-  #   fsm.event :submit, :new => :submitted, :draft => :submitted, :redraft => :resubmitted
-  #   fsm.event :save, :new => :draft, :draft => :draft, :redraft => :redraft
-  #   fsm.event :reset, :submitted => :redraft, :resubmitted => :redraft
-  #   fsm.event :delete, :draft => :destroyed, :redraft => :archived
-  #   fsm.after_any_event ->(event, state) { @wigwam = state }
-  #   fsm.after_delete ->(state) { @thing.destroy if state == :destroyed }
-  # end
-  # @absence_state ||= Bstard.describe do |fsm|
-  #   fsm.initial @persisted_value || :new
-  #   fsm.event :submit, :new => :submitted, :draft => :submitted, :redraft => :resubmitted
-  #   fsm.event :save, :new => :draft, :draft => :draft, :redraft => :redraft
-  #   fsm.event :reset, :submitted => :redraft, :resubmitted => :redraft
-  #   fsm.event :delete, :draft => :destroyed, :redraft => :archived
-  # end
-  # @absence_state.current_state
-  # @absence_state.submit!
-  # @absence_state.can_submit?
-  # @absence_state.save!
-  #
 end
