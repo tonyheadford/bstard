@@ -2,6 +2,9 @@
 
 A small state machine library with a simple interface. Designed around the concept of aggregation rather than inheritance enabling its use wherever you need it without the need to derive from it or mix it in.
 
+[![Gem Version](https://badge.fury.io/rb/bstard.svg)](http://badge.fury.io/rb/bstard)
+[![Build Status](https://travis-ci.org/tonyheadford/bstard.svg)](https://travis-ci.org/tonyheadford/bstard)
+
 ## Installation
 
 Add this line to your application's Gemfile:
