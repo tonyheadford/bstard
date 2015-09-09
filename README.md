@@ -95,7 +95,7 @@ Event callbacks are configured with `on`
 ``` ruby
   machine = Bstard.define do |fsm|
     # ...
-    fsm.on :submit do |previous_state|
+    fsm.on :submit do |event, state, next_state|
       # code that needs to be run when :submit is triggered
     end
   end
@@ -106,7 +106,7 @@ State change callbacks are configured with `when`
 ``` ruby
   machine = Bstard.define do |fsm|
     # ...
-    fsm.when :submitted do |previous_state|
+    fsm.when :submitted do |event, previous_state, state|
       # code that needs to run when state changes to :submitted
     end
   end
@@ -117,10 +117,10 @@ Use the symbol `:any` for event or state change callbacks that should by run whe
 ``` ruby
   machine = Bstard.define do |fsm|
     # ...
-    fsm.on :any do |previous_state|
+    fsm.on :any do |event, state, next_state|
       # code that will run when any event is triggered
     end
-    fsm.when :any do |previous_state|
+    fsm.when :any do |event, previous_state, state|
       # code that will run when after any state change
     end
   end
@@ -141,8 +141,8 @@ private
       fsm.initial status
       fsm.event :save, :new => :draft
       fsm.event :approve, :draft => :approved
-      fsm.when :any do |prev_state|
-        status = fsm.current_state
+      fsm.when :any do |event, prev_state, new_state|
+        status = new_state
       end
     end
   end

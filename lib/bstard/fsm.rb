@@ -59,12 +59,12 @@ class Bstard::Fsm
         transitions = @events[evt]
         raise Bstard::InvalidEvent.new("Unknown event <#{evt.to_s}>") if transitions.nil?
         new_state = transitions[current_state]
-        raise Bstard::InvalidTransition.new("Cannot <#{evt.to_s}> from [#{current_state.to_s}]") if new_state.nil?
-        @event_callbacks.fetch(evt.to_sym, []).concat(@event_callbacks.fetch(:any, [])).each { |c| c.call(current_state) }
         old_state = current_state
+        raise Bstard::InvalidTransition.new("Cannot <#{evt.to_s}> from [#{current_state.to_s}]") if new_state.nil?
+        @event_callbacks.fetch(evt.to_sym, []).concat(@event_callbacks.fetch(:any, [])).each { |c| c.call(evt, old_state, new_state) }
         @current_state = new_state
-        @state_callbacks.fetch(current_state, []).concat(@state_callbacks.fetch(:any, [])).each { |c| c.call(old_state) }
-        current_state
+        @state_callbacks.fetch(current_state, []).concat(@state_callbacks.fetch(:any, [])).each { |c| c.call(evt, old_state, new_state) }
+        new_state
       end
     end
   end
