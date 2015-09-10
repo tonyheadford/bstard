@@ -10,7 +10,7 @@ class Bstard::Fsm
   end
 
   def initial(state)
-    unless state.nil?
+    unless state.nil? || state.empty?
       @current_state = state.to_sym
       add_state(current_state)
     end

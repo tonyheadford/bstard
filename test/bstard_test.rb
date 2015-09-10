@@ -30,4 +30,18 @@ class BstardTest < Minitest::Test
     end
     assert_equal :wigwam, b.current_state, 'current state not a symbol'
   end
+
+  def test_initial_will_not_change_if_given_empty_string
+    b = Bstard.define do |fsm|
+      fsm.initial ""
+    end
+    assert_equal :uninitialized, b.current_state, 'current_state was initialized by empty string'
+  end
+
+  def test_initial_will_not_change_if_given_nil
+    b = Bstard.define do |fsm|
+      fsm.initial nil
+    end
+    assert_equal :uninitialized, b.current_state, 'current_state was initialized by nil value'
+  end
 end

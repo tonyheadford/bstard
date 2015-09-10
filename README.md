@@ -44,7 +44,7 @@ This defines a state machine that:
 Pretty simple huh?
 
 ### Initial State
-Set the initial state of the machine with `initial`. If no initial state is set a default state `:uninitialized` is used.
+Set the initial state of the machine with `initial`. If no initial state is set a default state `:uninitialized` is used. As a safeguard `initial` will ignore `nil` or empty string values.
 
 ### Querying the State
 
@@ -78,6 +78,22 @@ Helper methods are dynamically generated to enable querying whether an event can
   machine.can_delete?
   #=> false
 ```
+
+### Defining Events
+
+Events are defined by supplying an event name followed by one or more state transition declarations. Each state transition declaration is just a hash key value pair.  The key represents the starting state and the value the ending state.
+
+``` ruby
+  machine = Bstard.define do |fsm|
+    fsm.initial :new
+    fsm.event :save, :new => :draft
+    fsm.event :approve, :draft => :approved
+    fsm.event :publish, :approved => :published
+    fsm.event :delete, :draft => :deleted, :approved => :deleted
+  end
+```
+
+I find the spear `=>` Hash syntax style works best for me in describing the intent of the definition.
 
 ### Triggering Events
 
