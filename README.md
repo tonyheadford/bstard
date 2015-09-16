@@ -1,6 +1,6 @@
 # Bstard - A New State(sman) Machine
 
-A small state machine library with a simple interface. Designed around the concept of aggregation rather than inheritance enabling its use wherever you need it without the need to derive from it or mix it in.
+A small state machine library with a simple interface. Designed around the concept of aggregation rather than inheritance so it can be dropped in where needed without the requirement to derive from it or mixin to your own classes.  The gem is pure Ruby and has no dependencies on Rails or any other frameworks and should play nicely with anything.
 
 [![Gem Version](https://badge.fury.io/rb/bstard.svg)](http://badge.fury.io/rb/bstard)
 [![Build Status](https://travis-ci.org/tonyheadford/bstard.svg)](https://travis-ci.org/tonyheadford/bstard)
@@ -82,7 +82,7 @@ The current state of the machine is accessed via the `current_state` method
   #=> :new
 ```
 
-Helper methods are automatically generated for each state consisting of the state name suffixed with a question mark.  This method returns `true` if the current state matches the queried state or `false` otherwise.
+Query whether a state is the `current_state` by sending a message using the state name suffixed with a question mark.
 
 ``` ruby
   machine.new?
@@ -95,7 +95,7 @@ Helper methods are automatically generated for each state consisting of the stat
 
 ### Querying Transitions
 
-Helper methods are dynamically generated to enable querying whether an event can transition the current state.  These methods are named using the event name prefixed with 'can\_' and suffixed with a question mark.
+Check whether an event can transition the `current_state` by sending a method using the event name prefixed with 'can\_' and suffixed with a question mark.
 
 ```ruby
   machine.current_state
@@ -162,7 +162,7 @@ private
       fsm.event :save, :new => :draft
       fsm.event :approve, :draft => :approved
       fsm.when :any do |event, prev_state, new_state|
-        status = new_state
+        @status = new_state
       end
     end
   end
